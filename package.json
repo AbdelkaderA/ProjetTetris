@@ -1,0 +1,10 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "script": {
+    "start": "node server/app.js"
+  },
+  "dependencies": {
+    "express": "*"
+  }
+}
