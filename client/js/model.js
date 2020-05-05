@@ -8,7 +8,7 @@ function initializeModel(grille) {
   grille.y = -1;
   initializeGrille(grille);
   chooseBloc(grille);
-  window.setInterval(update, 500, grille);
+  window.setInterval(update, 250, grille);
 }
 function initializeGrille(grille) {
   for (let i = 0; i < grille.height; i++) {
@@ -31,14 +31,41 @@ function chooseBloc(grille) {
   grille.x = grille.width / 2 - 1;
   grille.y = 0;
 }
-function update(grille) {
-  if (grille.y < grille.height - grille.bloc.cells[grille.orientation].length) {
-    grille.y++;
-  } else {
-    // stockBloc(grille);
-    // chooseBloc(grille);
+function incOrientation(grille) {
+  grille.orientation = (grille.orientation + 1) % grille.bloc.cells.length;
+}
+
+function incADroite(grille) {
+  if (
+    grille.x < grille.width - grille.bloc.cells[grille.orientation][0].length &&
+    blocCanGoThere(grille, grille.x + 1, grille.y)
+  ) {
+    grille.x++;
   }
 }
+
+function incAGauche(grille) {
+  if (grille.x > 0 && blocCanGoThere(grille, grille.x - 1, grille.y)) {
+    grille.x--;
+  }
+}
+
+function update(grille) {
+  if (
+    grille.y < grille.height - grille.bloc.cells[grille.orientation].length &&
+    blocCanGoThere(grille, grille.x, grille.y + 1)
+  ) {
+    grille.y++;
+  } else {
+    stockBloc(grille);
+    chooseBloc(grille);
+  }
+}
+
+function blocCanGoThere(grille, x, y) {
+  return true;
+}
+
 function stockBloc(grille) {
   let cells = grille.bloc.cells[grille.orientation];
   for (let i = 0; i < cells.length; i++) {
@@ -48,5 +75,5 @@ function stockBloc(grille) {
       }
     }
   }
-  console.log(grille.cells);
+  //console.log(grille.cells);
 }
