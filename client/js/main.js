@@ -129,7 +129,6 @@ const BLOCS = {
   },
 };
 let grille = {};
-initializeModel(grille);
-
-initializeView(grille);
+//initializeModel(grille);
+//initializeView(grille);
 initializeController(grille);

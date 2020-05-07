@@ -1,5 +1,6 @@
-function initializeController(grille) {
+function initializeController(grille) { //permet le controle des directions
   window.onkeydown = (event) => {
+    // console.log(event.code); //pour afficher 
     switch (event.code) {
       case "ArrowUp":
         incOrientation(grille);
